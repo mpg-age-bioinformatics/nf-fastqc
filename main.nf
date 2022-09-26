@@ -17,7 +17,7 @@ process fastqc {
 }
 
 workflow {
-    data = channel.fromPath( "${params.raw_data}*fastq.gz" )
-    data = data.filter{ ! file("$it".replaceAll(/.fastq.gz/, "_fastqc.html").replace("${params.raw_data}", "${params.project_folder}fastqc_output/") ).exists() }
+    data = channel.fromPath( "${params.fastqc_raw_data}*fastq.gz" )
+    data = data.filter{ ! file("$it".replaceAll(/.fastq.gz/, "_fastqc.html").replace("${params.fastqc_raw_data}", "${params.project_folder}fastqc_output/") ).exists() }
     fastqc( data )
 }
