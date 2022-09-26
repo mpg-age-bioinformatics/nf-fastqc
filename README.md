@@ -1,4 +1,4 @@
-# nf-kallisto-deseq2
+# nf-fastqc
 
 nextflow differential gene expression pipeline
 
@@ -10,6 +10,8 @@ MacOS issues might lead to the need for:
 ```
 export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 ```
+
+Use `export NXF_ORG=mpgagebioinformatics` for running our pipes from github.
 
 ### Example local run
 
