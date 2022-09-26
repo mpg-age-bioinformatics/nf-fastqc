@@ -13,6 +13,7 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 
 Use `export NXF_ORG=mpgagebioinformatics` for running our pipes from github.
 
+
 ### Local run
 
 After editing the following content of `local.config`:
