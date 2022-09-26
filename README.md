@@ -11,8 +11,11 @@ MacOS issues might lead to the need for:
 export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 ```
 
-Use `export NXF_ORG=mpgagebioinformatics` for running our pipes from github.
+Use `export NXF_ORG=mpgagebioinformatics` for running our pipes from github. Eg.:
 
+```
+nexflow nf-fastqc
+```
 
 ### Local run
 
