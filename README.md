@@ -25,7 +25,6 @@ you can run fastqc locally with:
 ```
 nextflow -c local.config run workflow.nf
 ```
-
 ### Cluster run
 
 For running on `r2d2` edit `r2d2.config` and run:
