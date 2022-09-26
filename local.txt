@@ -1,3 +1,0 @@
-params.run_type='local'
-params.project_folder='/Users/jboucas/nf-kallisto-deseq2-test/'
-params.raw_data='/Users/jboucas/Desktop/test_ftp/'

@@ -23,3 +23,8 @@ you can run fastq locally with:
 ```
 nextflow -c local.config run workflow.nf
 ```
+
+For running on `r2d2` edit `r2d2.config` and run:
+```
+nextflow -c r2d2.config run workflow.nf
+```
