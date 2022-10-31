@@ -25,13 +25,13 @@ params.project_folder='/Users/jboucas/nf-kallisto-deseq2-test/'
 params.raw_data='/Users/jboucas/Desktop/test_ftp/'
 ```
 
-you can run fastqc locally with:
+you can run fastqc locally add `includeConfig 'local.config'` to the end of `nextflow.config` and then:
 ```
-nextflow -c local.config run workflow.nf
+nextflow run main.nf
 ```
 ### Cluster run
 
-For running on `r2d2` edit `r2d2.config` and run:
+For running on `r2d2` add `includeConfig 'r2d2.config'` to the end of `nextflow.config` with::
 ```
-nextflow -c r2d2.config run workflow.nf
+nextflow run main.nf
 ```
