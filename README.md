@@ -1,37 +1,43 @@
-# nf-fastqc
+# nf-kallisto
 
-nextflow differential gene expression pipeline
-
-nextflow homepage: [https://www.nextflow.io](https://www.nextflow.io)
-
-nextflow readthedocs: [https://www.nextflow.io/docs/latest/index.html](https://www.nextflow.io/docs/latest/index.html)
-
-MacOS issues might lead to the need for:
+Create the test directory:
 ```
-export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+mkdir -p ~/nf-kallisto-test/raw_data
 ```
 
-Use `export NXF_ORG=mpgagebioinformatics` for running our pipes from github. Eg.:
-
+Download the demo data:
 ```
-nexflow nf-fastqc
-```
-
-### Local run
-
-After editing the following content of `local.config`:
-```
-params.project_folder='/Users/jboucas/nf-kallisto-deseq2-test/'
-params.raw_data='/Users/jboucas/Desktop/test_ftp/'
+cd ~/nf-kallisto-test/raw_data
+curl -J -O https://datashare.mpcdf.mpg.de/s/jcEaS5vqpJO0lOy/download
+curl -J -O https://datashare.mpcdf.mpg.de/s/XHanbnjfvQ9rACD/download
+curl -J -O https://datashare.mpcdf.mpg.de/s/sIebkRdMfMSweq2/download
+curl -J -O https://datashare.mpcdf.mpg.de/s/zoNxS9vRI7jl77y/download
+curl -J -O https://datashare.mpcdf.mpg.de/s/0WHGNIhjJC792lY/download
+curl -J -O https://datashare.mpcdf.mpg.de/s/ZlM0lWKPh8KrP6B/download
+curl -J -O https://datashare.mpcdf.mpg.de/s/o3O6BKaEXqB7TTo/download
 ```
 
-you can run fastqc locally add `includeConfig 'local.config'` to the end of `nextflow.config` and then:
+Download the paramaters file:
 ```
-nextflow run main.nf
+cd ~/nf-kallisto-test
+curl -J -O https://raw.githubusercontent.com/mpg-age-bioinformatics/nf-fastqc/main/params.json
 ```
-### Cluster run
 
-For running on `r2d2` add `includeConfig 'r2d2.config'` to the end of `nextflow.config` with::
+Run the workflow:
 ```
-nextflow run main.nf
+RELEASE=1.0.0
+PROFILE=local
+nextflow run mpg-age-bioinformatics/nf-fastqc -r ${RELEASE} -params-file params.json -entry images -profile ${PROFILE} && \
+nextflow run mpg-age-bioinformatics/nf-fastqc -r ${RELEASE} -params-file params.json -profile ${PROFILE} && \
+```
+
+## Contributing
+
+Make a commit, check the last tag, add a new one, push it and make a release:
+```
+git add -A . && git commit -m "<message>" && git push
+git describe --abbrev=0 --tags
+git tag -e -a <tag> HEAD
+git push origin --tags
+gh release create <tag> 
 ```
