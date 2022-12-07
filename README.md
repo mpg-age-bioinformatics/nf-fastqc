@@ -1,4 +1,4 @@
-# nf-kallisto
+# nf-fastqc
 
 Create the test directory:
 ```
