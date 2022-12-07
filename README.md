@@ -28,7 +28,7 @@ Run the workflow:
 RELEASE=1.0.0
 PROFILE=local
 nextflow run mpg-age-bioinformatics/nf-fastqc -r ${RELEASE} -params-file params.json -entry images -profile ${PROFILE} && \
-nextflow run mpg-age-bioinformatics/nf-fastqc -r ${RELEASE} -params-file params.json -profile ${PROFILE} && \
+nextflow run mpg-age-bioinformatics/nf-fastqc -r ${RELEASE} -params-file params.json -profile ${PROFILE}
 ```
 
 ## Contributing
