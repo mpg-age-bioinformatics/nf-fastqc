@@ -55,11 +55,11 @@ process upload_paths {
   stageOutMode 'move'
 
   script:
-    """
+  """
     cd ${params.project_folder}/fastqc_output
     rm -rf upload.txt
-    for f in $(ls *.html) ; do echo "fastqc $(readlink -f ${f})" >>  upload.txt ; done
-    """
+    for f in \$(ls *.html) ; do echo "fastqc \$(readlink -f \${f})" >>  upload.txt ; done
+  """
 }
 
 workflow images {
