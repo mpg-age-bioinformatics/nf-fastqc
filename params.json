@@ -1,4 +1,4 @@
 { 
   "project_folder" : "/Users/jboucas/nf-kallisto-test" ,
-  "kallisto_raw_data" : "/Users/jboucas/nf-kallisto-test/raw_data" ,
+  "fastqc_raw_data" : "/Users/jboucas/nf-kallisto-test/raw_data" ,
 }
