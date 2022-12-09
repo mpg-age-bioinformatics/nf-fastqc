@@ -50,11 +50,27 @@ process fastqc {
     """
 }
 
+process upload_paths {
+  stageInMode 'symlink'
+  stageOutMode 'move'
+
+  script:
+    """
+    cd ${params.project_folder}/fastqc_output
+    rm -rf upload.txt
+    for f in $(ls *.html) ; do echo "fastqc $(readlink -f ${f})" >>  upload.txt ; done
+    """
+}
+
 workflow images {
   main:
     get_images()
 }
 
+workflow upload {
+  main:
+    upload_paths()
+}
 
 workflow {
     data = channel.fromPath( "${params.kallisto_raw_data}/*fastq.gz" )
