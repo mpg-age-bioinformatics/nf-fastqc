@@ -58,7 +58,9 @@ process upload_paths {
   """
     cd ${params.project_folder}/fastqc_output
     rm -rf upload.txt
-    for f in \$(ls *.html) ; do echo "fastqc \$(readlink -f \${f})" >>  upload.txt ; done
+    for f in \$(ls *.html) ; do echo "fastqc \$(readlink -f \${f})" >>  upload.txt_ ; done
+    uniq upload.txt_ upload.txt 
+    rm upload.txt_
   """
 }
 
