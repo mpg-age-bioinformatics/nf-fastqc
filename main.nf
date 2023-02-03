@@ -42,11 +42,12 @@ process fastqc {
   
   input:
     path f
+    val fastqc_output
   
   script:
     """
-    mkdir -p /workdir/fastqc_output
-    fastqc -t ${task.cpus} -o /workdir/fastqc_output /raw_data/${f}
+    mkdir -p /workdir/${fastqc_output}
+    fastqc -t ${task.cpus} -o /workdir/${fastqc_output} /raw_data/${f}
     """
 }
 
@@ -54,9 +55,12 @@ process upload_paths {
   stageInMode 'symlink'
   stageOutMode 'move'
 
+  input:
+    val fastqc_output
+
   script:
   """
-    cd ${params.project_folder}/fastqc_output
+    cd ${params.project_folder}/${fastqc_output}
     rm -rf upload.txt
     for f in \$(ls *.html) ; do echo "fastqc \$(readlink -f \${f})" >>  upload.txt_ ; done
     uniq upload.txt_ upload.txt 
@@ -70,12 +74,22 @@ workflow images {
 }
 
 workflow upload {
-  main:
-    upload_paths()
+  if ( 'fastqc_output' in params.keySet() ) {
+    fastqc_output="${params.fastqc_output}"
+  } else {
+    fastqc_output="fastqc_output"
+  }
+  upload_paths(fastqc_output)
 }
 
 workflow {
+    if ( 'fastqc_output' in params.keySet() ) {
+      fastqc_output="${params.fastqc_output}"
+    } else {
+      fastqc_output="fastqc_output"
+    }
+
     data = channel.fromPath( "${params.fastqc_raw_data}/*fastq.gz" )
-    data = data.filter{ ! file("$it".replaceAll(/.fastq.gz/, "_fastqc.html").replace("${params.fastqc_raw_data}", "${params.project_folder}/fastqc_output/") ).exists() }
-    fastqc( data )
+    data = data.filter{ ! file("$it".replaceAll(/.fastq.gz/, "_fastqc.html").replace("${params.fastqc_raw_data}", "${params.project_folder}/${fastqc_output}/") ).exists() }
+    fastqc( data, fastqc_output )
 }
