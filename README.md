@@ -39,5 +39,5 @@ git add -A . && git commit -m "<message>" && git push
 git describe --abbrev=0 --tags
 git tag -e -a <tag> HEAD
 git push origin --tags
-gh release create <tag> 
+gh release create <tag> --generate-notes
 ```
